@@ -1,0 +1,88 @@
+﻿@{
+    Layout = null;
+
+    string name = "Francesco";
+    string surname = "Calimera";
+
+    int SumNums(int n)
+    {
+        int sum = 0;
+        for (int i = 1; i <= n; i++) sum += i;
+        return sum;
+    }
+
+    int SumChar(char c, string str)
+    {
+        char[] characters = str.ToCharArray();
+        int sum = 0;
+        foreach(var ch in characters)
+        {
+            if (ch == c) sum++;
+        }
+        return sum;
+    }
+
+    List<int> RndList()
+    {
+        var rnd = new Random();
+        List<int> numList = new List<int>();
+        for(int i = 0; i < 20; i++)
+        {
+            numList.Add(rnd.Next(1, 91));
+        }
+        return numList;
+    }
+
+    List<int> numList = RndList();
+}
+
+<div style="text-align:center; ">
+    @*name surname*@
+    <h2>
+        @name @surname
+    </h2>
+
+    @*sum nums 1 to n*@
+    <span>
+        @SumNums(10)
+    </span>
+
+    @*count how many 'a' string contains*@
+    <div>
+        "nel mezzo del cammin di nostra vita" contiene @SumChar('a', "nel mezzo del cammin di nostra vita") lettere 'a'.
+    </div>
+
+    @*rnd int list, show only if is >= 20 and <=70*@
+    <div>
+        @{
+            for(int i = 0; i < numList.Count(); i++)
+            {
+                if (numList.ElementAt(i) >= 20 && numList.ElementAt(i) <= 70)
+                {
+                    if (i != numList.Count() - 1)
+                    {
+                        <text>@numList.ElementAt(i), </text>
+                    }
+                    else
+                    {
+                        <text>@numList.ElementAt(i).</text>
+                    }
+
+                }
+            }
+        }
+    </div>
+
+    @*print time*@
+    <div>
+        @DateTime.Now.ToString("HH:MM:ss")
+        @{
+            var date = DateTime.Now;
+            <p>@date.AddDays(-7)</p>
+            <p>@date.ToString("dddd")</p>
+            <p>@date.AddYears(-1).ToString("dddd")</p>
+        }
+
+    </div>
+
+</div>
